@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class LoanType extends AbstractType
 {
@@ -17,7 +18,10 @@ class LoanType extends AbstractType
             ->add('amount')
             ->add('rate')
             ->add('period')
-            ->add('firstPayment');
+            ->add('firstPayment', DateType::class, [
+                'input' => 'datetime',
+                'widget' => 'single_text',
+            ]);
     }
 
     /**
@@ -27,7 +31,7 @@ class LoanType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Loan',
-            'csrf_token' => 'loan_calculator',
+            'csrf_token_id' => 'loan_calculator',
         ));
     }
 

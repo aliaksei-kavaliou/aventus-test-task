@@ -51,31 +51,31 @@ class DefaultControllerTest extends WebTestCase
     public function testLoanAction()
     {
         $client = self::createClient();
+        $token = $client->getContainer()->get('security.csrf.token_manager')->getToken('loan_calculator');
         $crawler = $client->request('GET', '/loan');
 
         $this->assertTrue($client->getResponse()->isOk());
         $form = $crawler->filterXPath('//form[@name="loan"]');
         $this->assertNotEmpty($form);
-        $this->assertNotEmpty($form->filterXPath('//input[@name="amount"]'));
-        $this->assertNotEmpty($form->filterXPath('//input[@name="period"]'));
-        $this->assertNotEmpty($form->filterXPath('//input[@name="rate"]'));
-        $this->assertNotEmpty($form->filterXPath('//input[@name="firstPayment"]'));
+        $this->assertNotEmpty($form->filterXPath('//input[@id="loan_amount"]'));
+        $this->assertNotEmpty($form->filterXPath('//input[@id="loan_period"]'));
+        $this->assertNotEmpty($form->filterXPath('//input[@id="loan_rate"]'));
+        $this->assertNotEmpty($form->filterXPath('//input[@id="loan_firstPayment"]'));
         $this->assertNotEmpty($form->filterXPath('//input[@type="submit"]'));
 
-        $token = $client->getContainer()->get('security.csrf.token_manager')->getToken('loan_calculator');
-        $client->request('POST', '/loan', [
-            '_token' => $token,
+        $crawler1 = $client->request('POST', '/loan', [
             'loan' => [
                 'amount' => 100000,
                 'period' => 6,
                 'rate' => 10,
                 'firstPayment' => '2017-05-31',
+                '_token' => $token,
             ],
         ]);
 
         $this->assertTrue($client->getResponse()->isOk());
-        $table = $crawler->filterXPath('//table[@id="payments"]');
+        $table = $crawler1->filterXPath('//table[@id="payments"]');
         $this->assertNotEmpty($table);
-        $this->assertCount(6, $table->filterXPath('//tbody')->children());
+        $this->assertCount(6, $table->filterXPath('//tbody')->filter('tr'));
     }
 }

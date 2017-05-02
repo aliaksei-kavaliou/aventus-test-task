@@ -45,9 +45,9 @@ class LoanPayment
     /**
      * @var float
      *
-     * @ORM\Column(name="payed", type="float")
+     * @ORM\Column(name="payment", type="float")
      */
-    private $payed;
+    private $payment;
 
     /**
      * @var float
@@ -147,27 +147,27 @@ class LoanPayment
     }
 
     /**
-     * Set payed
+     * Set payment
      *
-     * @param float $payed
+     * @param float $payment
      *
      * @return LoanPayment
      */
-    public function setPayed($payed)
+    public function setPayment($payment)
     {
-        $this->payed = $payed;
+        $this->payment = $payment;
 
         return $this;
     }
 
     /**
-     * Get payed
+     * Get payment
      *
      * @return float
      */
-    public function getPayed()
+    public function getPayment()
     {
-        return $this->payed;
+        return $this->payment;
     }
 
     /**

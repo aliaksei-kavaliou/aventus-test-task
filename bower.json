@@ -1,0 +1,14 @@
+{
+  "name": "test_task",
+  "homepage": "https://github.com/aliaksei-kavaliou/aventus-test-task",
+  "authors": [
+    "Aliaksei Kavaliou <aliaksei.kavaliou@idamas.lt>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery-ui": "^1.12.1"
+  }
+}

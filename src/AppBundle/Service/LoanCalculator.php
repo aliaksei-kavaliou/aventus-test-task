@@ -117,14 +117,13 @@ class LoanCalculator
 
             $payment = [
                 'date' => $date,
-                'payed' => round($payed, 2),
-                'debt' => $this->amount - round($payed, 2),
-            ];
+                'payment' => round($monthPayment, 2),];
             $interest = ($this->amount - $payed) * $this->rate / 12;
             $mainDebt = $monthPayment - $interest;
             $payed += $mainDebt;
             $payment['mainDebt'] = round($mainDebt, 2);
             $payment['interest'] = round($interest, 2);
+            $payment['debt'] = $this->amount - round($payed, 2);
             $payments[] = $payment;
         }
 

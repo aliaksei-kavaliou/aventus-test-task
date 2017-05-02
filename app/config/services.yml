@@ -10,3 +10,5 @@ services:
             - { name: twig.extension }
     app.text_modifier:
         class: AppBundle\Service\TextModifier
+    app.loan_calculator:
+        class: AppBundle\Service\LoanCalculator

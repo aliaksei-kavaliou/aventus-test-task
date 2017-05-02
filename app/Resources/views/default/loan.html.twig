@@ -1,0 +1,74 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Loan calculator{% endblock %}
+{% block body %}
+    <h1>Loan calculator</h1>
+        
+    {{ form_start(form, {'attr':{'class':'form-inline'} }) }}
+    
+    {{ form_errors(form) }}
+    
+    <div class="form-group">
+        {{ form_widget(form.amount, {'attr':{'class':'form-control', 'placeholder':'Amount'} }) }}
+        {{ form_errors(form.amount) }}
+    </div>
+    
+    <div class="form-group">
+        {{ form_widget(form.rate, {'attr':{'class':'form-control', 'placeholder':'Rate'} }) }}
+        {{ form_errors(form.rate) }}
+    </div>
+    
+    <div class="form-group">
+        {{ form_widget(form.period, {'attr':{'class':'form-control', 'placeholder':'Period'} }) }}
+        {{ form_errors(form.period) }}
+    </div>
+    
+    <div class="form-group">
+        {{ form_widget(form.firstPayment, {'attr':{'class':'form-control datepicker', 'placeholder':'First Payment'} }) }}
+        {{ form_errors(form.firstPayment) }}
+    </div>
+    
+    <div class="form-group">
+        <input class="btn btn-success" type="submit" value="Calculate"/>
+    </div>
+    
+    {{ form_end(form) }}
+    
+        <table id="payments" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Payment</th>
+                    <th>Main debt</th>
+                    <th>Interest</th>
+                    <th>Remain</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if loan is not null %}
+                    {% for payment in loan.payments %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ payment.paymentDate | date('Y-m-d') }}</td>
+                            <td>{{ payment.payment }}</td>
+                            <td>{{ payment.mainDebt }}</td>
+                            <td>{{ payment.interest }}</td>
+                            <td>{{ payment.remain }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $('.datepicker').datepicker({
+            dateFormat: 'yy-mm-dd',
+            onSelect: function(date) {
+                $('.datepicker').removeAttr('placeholder');
+            },
+        });
+    </script>
+{% endblock %}
