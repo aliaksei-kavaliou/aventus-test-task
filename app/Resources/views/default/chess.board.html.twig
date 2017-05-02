@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+{% block title %}Chess board{% endblock %}
+
+{% block body %}
+<table class="board">
+    <thead>
+        {% include ':default:chess.letters.html.twig' %}
+    </thead>
+    
+    <tfoot>
+        {% include ':default:chess.letters.html.twig' %}
+    </tfoot>
+    
+    <tbody>
+    {% for i in 1..8 %}
+        <tr>
+            <td class="row_num">{{ 9 - i }}</td>
+        {% for j in 1..8 %}
+            <td class="cell {{ 0 == (i + j) % 2 ? 'white' : 'black' }}"></td>
+        {% endfor %}
+            <td class="row_num">{{ 9 - i }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset("css/chess.css") }}">
+{% endblock %}

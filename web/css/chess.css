@@ -1,0 +1,30 @@
+.board {
+    border: 1px solid black;
+    border-spacing: 0px;
+    padding: 2px;
+}
+
+.board .cell {
+    width: 50px;
+    height: 50px;
+}
+
+.board .cell.black {
+    background-color: black;
+}
+
+.board .cell.white {
+    background-color: white;
+}
+
+.board .row_num {
+    width: 10px;
+}
+
+.board td {
+    text-align: center;
+}
+
+.board .cell {
+    border: 1px solid black;
+}
