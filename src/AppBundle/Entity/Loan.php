@@ -180,6 +180,7 @@ class Loan
     public function addPayment(\AppBundle\Entity\LoanPayment $payment)
     {
         $this->payments[] = $payment;
+        $payment->setLoan($this);
 
         return $this;
     }
